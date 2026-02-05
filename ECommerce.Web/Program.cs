@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Persistence;
 using Persistence.Data;
+using Persistence.Repositories;
 using Service;
 using Service.MappingProfiles;
 using ServiceAbstraction;
@@ -38,7 +39,7 @@ namespace ECommerce.Web
 
             builder.Services.AddScoped<IDataSeeding, DataSeeding>();
 
-            builder.Services.AddScoped<IUnitOfWork,IUnitOfWork>();
+            builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
             //builder.Services.AddAutoMapper(X => X.AddProfile(new ProductProfile()));
             builder.Services.AddAutoMapper(cfg => { },
                 typeof(ServiceAssemblyReference).Assembly);

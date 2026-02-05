@@ -13,7 +13,7 @@ namespace Service
 {
     public class ProductService(IUnitOfWork unitOfWork , IMapper mapper) : IProductService
     {
-        public async Task<IEnumerable<BrandDTO>> GetAllBrandsAsync(int Id)
+        public async Task<IEnumerable<BrandDTO>> GetAllBrandsAsync()
         {
             // first call the required repo
             var Repo = unitOfWork.GetRepository<ProductBrand,int>();
@@ -40,13 +40,13 @@ namespace Service
             return mapper.Map<IEnumerable<Product>,IEnumerable<ProductDTO>>(Products);
         }
 
-        public async Task<IEnumerable<TypeDTO>> GetAllTypesAsync(int Id)
+        public async Task<IEnumerable<TypeDTO>> GetAllTypesAsync()
         {
             var Types = await unitOfWork.GetRepository<ProductType,int>().GetAllAsync();
             return mapper.Map<IEnumerable<ProductType>, IEnumerable<TypeDTO>>(Types);
         }
 
-        public async Task<ProductDTO> GetProductById(int Id)
+        public async Task<ProductDTO> GetProductByIdAsync(int Id)
         {
             var Product = await unitOfWork.GetRepository<Product, int>().GetByIdAsync(Id);
             return mapper.Map<Product, ProductDTO>(Product);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Service;
 using ServiceAbstraction;
 using Shared.DTOs;
@@ -25,9 +26,26 @@ namespace Presentation.Controllers
             return Ok(Products);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<IEnumerable<ProductDTO>> GetProduct()
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProduct(int id)
         {
+            var Product = await serviceManager.ProductService.GetProductByIdAsync(id);
+            return Ok(Product);
+        }
+
+        [HttpGet("types")]
+
+        public async Task<ActionResult<IEnumerable<TypeDTO>>> GetTypes()
+        {
+            var Types = await serviceManager.ProductService.GetAllTypesAsync();
+            return Ok(Types);
+
+        }
+        [HttpGet("brands")]
+        public async Task<ActionResult<IEnumerable<BrandDTO>>> GetBrands()
+        {
+            var brands =await  serviceManager.ProductService.GetAllBrandsAsync();
+            return Ok(brands);
 
         }
     }
