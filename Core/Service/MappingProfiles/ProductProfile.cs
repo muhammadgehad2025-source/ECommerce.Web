@@ -18,7 +18,18 @@ namespace Service.MappingProfiles
                 .ForMember(dist=>dist.BrandName , 
                 options=>options.MapFrom(src=>src.ProductBrand.Name))
                 .ForMember(dist=>dist.TypeName , 
-                options=>options.MapFrom(src=>src.ProductType.Name));
+                options=>options.MapFrom(src=>src.ProductType.Name))
+
+                // add the base url to the picture url
+                /*.ForMember(dist=>dist.PictureUrl ,
+                options=>options.MapFrom(src=>$"https://localhost:7055/{src.PictureUrl}"));*/
+                // this is a static url
+
+                //we use the other overload of MapFrom to use a resolver class
+                .ForMember(dist => dist.PictureUrl,
+                options => options.MapFrom<PictureResolver>());
+
+
 
             CreateMap<ProductType, TypeDTO>();
             CreateMap<ProductBrand, BrandDTO>();

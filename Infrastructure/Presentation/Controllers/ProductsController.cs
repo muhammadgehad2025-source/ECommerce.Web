@@ -34,13 +34,13 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("types")]
-
         public async Task<ActionResult<IEnumerable<TypeDTO>>> GetTypes()
         {
             var Types = await serviceManager.ProductService.GetAllTypesAsync();
             return Ok(Types);
 
         }
+
         [HttpGet("brands")]
         public async Task<ActionResult<IEnumerable<BrandDTO>>> GetBrands()
         {
@@ -48,5 +48,6 @@ namespace Presentation.Controllers
             return Ok(brands);
 
         }
+
     }
 }

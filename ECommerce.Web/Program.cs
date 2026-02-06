@@ -78,6 +78,9 @@ namespace ECommerce.Web
             app.UseHttpsRedirection();
             // forces HTTP requests to use HTTPS
 
+            app.UseStaticFiles();
+            // to serve static files like images, CSS, JavaScript
+
             app.MapControllers();
             // connects the http routes to the controller actions 
 
